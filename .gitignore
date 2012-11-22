@@ -40,3 +40,4 @@ Release
 Packages/*
 !Packages/repositories.config
 TestResult.xml
+*.dat

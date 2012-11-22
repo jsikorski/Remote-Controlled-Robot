@@ -56,4 +56,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteControlledRobot.RobotApi\RemoteControlledRobot.RobotApi.csproj">
+      <Project>{17D3EB9E-0ECC-4476-8D3D-44F1CAFD4586}</Project>
+      <Name>RemoteControlledRobot.RobotApi</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
