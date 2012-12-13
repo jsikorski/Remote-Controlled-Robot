@@ -25,5 +25,14 @@ namespace RemoteControlledRobot.Controller
                 return Resources.manager;
             }
         }
+        internal static string GetString(Resources.StringResources id)
+        {
+            return ((string)(Microsoft.SPOT.ResourceUtility.GetObject(ResourceManager, id)));
+        }
+        [System.SerializableAttribute()]
+        internal enum StringResources : short
+        {
+            ControllerWindow = -29719,
+        }
     }
 }

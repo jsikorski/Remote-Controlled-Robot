@@ -1,4 +1,4 @@
-﻿namespace RemoteControlledRobot.Robot
+﻿namespace RemoteControlledRobot.Common
 {
     public enum MessageType : byte
     {

@@ -30,9 +30,9 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="FEZ_Components_ReflectiveSensor.cs" />
+    <Compile Include="Components\FEZ_Components_ReflectiveSensor.cs" />
     <Compile Include="MessagesHandlers\IMessagesHandler.cs" />
-    <Compile Include="MessageType.cs" />
+    <Compile Include="MessagesHandlers\SpeedMessagesHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -43,6 +43,9 @@
     <Compile Include="Robot.cs" />
     <Compile Include="MessagesController.cs" />
     <Compile Include="MessagesReceiver.cs" />
+    <Compile Include="RobotEventAggregator.cs" />
+    <Compile Include="Utils\BytesConverter.cs" />
+    <Compile Include="Utils\IntConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FEZMini_GHIElectronics.NETMF.FEZ, Version=4.1.8.0, Culture=neutral, processorArchitecture=MSIL" />
@@ -69,9 +72,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RemoteControlledRobot.Common\RemoteControlledRobot.Common.csproj">
+      <Project>{7EAC911D-1181-4530-942A-FCD22B77F061}</Project>
+      <Name>RemoteControlledRobot.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RemoteControlledRobot.RobotApi\RemoteControlledRobot.RobotApi.csproj">
       <Project>{17D3EB9E-0ECC-4476-8D3D-44F1CAFD4586}</Project>
       <Name>RemoteControlledRobot.RobotApi</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>

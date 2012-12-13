@@ -1,3 +1,5 @@
+using RemoteControlledRobot.Common;
+
 namespace RemoteControlledRobot.Robot.MessagesHandlers
 {
     public interface IMessagesHandler

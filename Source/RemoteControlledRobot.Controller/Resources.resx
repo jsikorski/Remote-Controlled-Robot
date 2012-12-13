@@ -117,4 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ControllerWindow" xml:space="preserve">
+    <value>&lt;Glide Version="1.0.5"&gt;
+  &lt;Window Name="ControllerWindow" Width="320" Height="240" BackColor="FFFFFF"&gt;
+    &lt;Slider Name="DirectionSlider" X="10" Y="31" Width="300" Height="30" Alpha="255" Direction="horizontal" SnapInterval="10" TickInterval="10" TickColor="000000" KnobSize="20" Minimum="0" Maximum="200" Value="100"/&gt;
+    &lt;Slider Name="SpeedSlider" X="266" Y="65" Width="30" Height="170" Alpha="255" Direction="vertical" SnapInterval="10" TickInterval="10" TickColor="000000" KnobSize="20" Minimum="0" Maximum="200" Value="100"/&gt;
+    &lt;Button Name="BeepButton" X="11" Y="178" Width="115" Height="50" Alpha="255" Text="Beep!" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
+    &lt;TextBlock Name="instance6460" X="7" Y="85" Width="250" Height="32" Alpha="255" Text="Remote Controlled Robot" TextAlign="Center" TextVerticalAlign="Top" Font="5" FontColor="000088" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="VelocityLabel" X="300" Y="86" Width="20" Height="32" Alpha="255" Text="v" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance15579" X="300" Y="117" Width="20" Height="32" Alpha="255" Text="l" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance15582" X="0" Y="5" Width="320" Height="32" Alpha="255" Text="direction" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance15585" X="300" Y="100" Width="20" Height="32" Alpha="255" Text="e" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance24424" X="300" Y="186" Width="20" Height="32" Alpha="255" Text="y" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance24427" X="300" Y="142" Width="20" Height="32" Alpha="255" Text="c" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance24430" X="300" Y="173" Width="20" Height="32" Alpha="255" Text="t" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance24433" X="300" Y="159" Width="20" Height="32" Alpha="255" Text="i" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance24436" X="300" Y="129" Width="20" Height="32" Alpha="255" Text="o" TextAlign="Center" TextVerticalAlign="Top" Font="4" FontColor="0" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance32454" X="0" Y="110" Width="265" Height="32" Alpha="255" Text="Jakub Sikorski" TextAlign="Center" TextVerticalAlign="Top" Font="5" FontColor="000088" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;TextBlock Name="instance32827" X="2" Y="133" Width="265" Height="32" Alpha="255" Text="Marek Sklodowski" TextAlign="Center" TextVerticalAlign="Top" Font="5" FontColor="000088" BackColor="000000" ShowBackColor="False"/&gt;
+    &lt;Button Name="StopButton" X="135" Y="178" Width="115" Height="50" Alpha="255" Text="Stop" Font="4" FontColor="000000" DisabledFontColor="808080" TintColor="000000" TintAmount="0"/&gt;
+  &lt;/Window&gt;
+&lt;/Glide&gt;</value>
+  </data>
 </root>

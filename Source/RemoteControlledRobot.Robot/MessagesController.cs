@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using RemoteControlledRobot.Common;
 using RemoteControlledRobot.Robot.MessagesHandlers;
 using VikingErik.NetMF.MicroLinq;
 
@@ -7,14 +8,25 @@ namespace RemoteControlledRobot.Robot
 {
     public class MessagesController
     {
+        private readonly MessagesReceiver _messagesReceiver;
         private readonly IEnumerable _messagesHandlers;
 
-        public MessagesController()
+        public MessagesController(RobotEventAggregator robotEventAggregator, MessagesReceiver messagesReceiver)
         {
-            _messagesHandlers = new ArrayList();
+            _messagesReceiver = messagesReceiver;
+            _messagesHandlers = new ArrayList
+                {
+                    new SpeedMessagesHandler(robotEventAggregator)
+                };
         }
 
-        public void ProcessMessage(byte[] data)
+        public void Start()
+        {
+            _messagesReceiver.OnDataReceived += ProcessMessage;
+            _messagesReceiver.Initialize();
+        }
+
+        private void ProcessMessage(byte[] data)
         {
             var messageType = (MessageType) data[0];
             var messageHandler = GetMessageHandler(messageType);

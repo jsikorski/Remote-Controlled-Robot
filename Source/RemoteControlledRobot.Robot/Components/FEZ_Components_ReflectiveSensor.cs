@@ -6,12 +6,11 @@ Unless required by applicable law or agreed to in writing, software distributed 
 */
 
 using System;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Hardware;
-using GHIElectronics.NETMF.Hardware;
 using GHIElectronics.NETMF.FEZ;
+using GHIElectronics.NETMF.Hardware;
+using Microsoft.SPOT;
 
-namespace GHIElectronics.NETMF.FEZ
+namespace RemoteControlledRobot.Robot.Components
 {
     public static partial class FEZ_Components
     {
