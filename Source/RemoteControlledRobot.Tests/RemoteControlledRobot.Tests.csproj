@@ -49,10 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\RemoteControlledRobot.Robot\Utils\BytesConverter.cs">
+    <Compile Include="..\RemoteControlledRobot.Common\BytesConverter.cs">
       <Link>BytesConverter.cs</Link>
     </Compile>
-    <Compile Include="..\RemoteControlledRobot.Robot\Utils\IntConverter.cs">
+    <Compile Include="..\RemoteControlledRobot.Common\IntConverter.cs">
       <Link>IntConverter.cs</Link>
     </Compile>
     <Compile Include="BytesConverterTests.cs" />

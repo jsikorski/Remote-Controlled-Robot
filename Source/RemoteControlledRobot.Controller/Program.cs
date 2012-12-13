@@ -1,9 +1,10 @@
-﻿using System.Text;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using GHIElectronics.NETMF.Glide;
 using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide.UI;
-using Gralin.NETMF.Nordic;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 
@@ -11,8 +12,7 @@ namespace RemoteControlledRobot.Controller
 {
     public class Program
     {
-        static Window window;
-        private static NRF24L01Plus _nrf24L01Plus;
+        private static readonly NrfPeerToPeerController NrfController = new NrfPeerToPeerController();
 
         public static void Main()
         {
@@ -24,34 +24,19 @@ namespace RemoteControlledRobot.Controller
 
             Glide.MainWindow = controllerWindow;
 
-            _nrf24L01Plus = new NRF24L01Plus();
-            _nrf24L01Plus.Initialize(SPI.SPI_module.SPI2, (Cpu.Pin)75, (Cpu.Pin)48, (Cpu.Pin)26);
+            var speedSlider = (Slider) controllerWindow.GetChildByName("SpeedSlider");
+            speedSlider.ValueChangedEvent += UpdateRobotSpeed;
 
-            var fezDominoAddress = Encoding.UTF8.GetBytes("COBRA");
-            const int channel = 10;
-            _nrf24L01Plus.Configure(fezDominoAddress, channel);
-
-            _nrf24L01Plus.Enable();
+            NrfController.Initialize("CONTR", "ROBOT");
 
             Thread.Sleep(Timeout.Infinite);
         }
 
-        private static byte _lastMessageId;
-
-        private static void SliderOnValueChangedEvent(object sender)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private static void UpdateRobotSpeed(object sender)
         {
-            Debug.Print((sender as Slider).Value.ToString());
-
-            _lastMessageId++;
-
-            var fezMiniAddress = Encoding.UTF8.GetBytes("ROBOT");
-            _nrf24L01Plus.SendTo(fezMiniAddress, new byte[] { 2, 0, 0, 0, _lastMessageId, 50 });
-        }
-
-        private static void ButtonOnPressEvent(object sender)
-        {
-            var fezMiniAddress = Encoding.UTF8.GetBytes("ROBOT");
-            _nrf24L01Plus.SendTo(fezMiniAddress, new byte[] { 1, 2, 3 });
+            var slider = (Slider) sender;
+            NrfController.SendSpeed((byte) slider.Value);
         }
     }
 }

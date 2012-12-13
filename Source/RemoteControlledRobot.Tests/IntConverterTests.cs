@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using RemoteControlledRobot.Robot.Utils;
+using RemoteControlledRobot.Common;
 
 namespace RemoteControlledRobot.Tests
 {

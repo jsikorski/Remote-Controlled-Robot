@@ -1,4 +1,4 @@
-﻿namespace RemoteControlledRobot.Robot.Utils
+namespace RemoteControlledRobot.Common
 {
     public static class BytesConverter
     {
