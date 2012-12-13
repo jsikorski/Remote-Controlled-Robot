@@ -16,7 +16,8 @@ namespace RemoteControlledRobot.Robot
             _messagesReceiver = messagesReceiver;
             _messagesHandlers = new ArrayList
                 {
-                    new SpeedMessagesHandler(robotEventAggregator)
+                    new SpeedMessagesHandler(robotEventAggregator), 
+                    new BeepMessagesHandler(robotEventAggregator)
                 };
         }
 

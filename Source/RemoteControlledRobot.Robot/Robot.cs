@@ -7,6 +7,7 @@ namespace RemoteControlledRobot.Robot
 {
     public class Robot
     {
+        private const int DefaultPiezzoBeepDuration = 1000;
         private static readonly OutputPort Led = new OutputPort((Cpu.Pin)FEZ_Pin.Digital.Di4, true);
         private readonly RobotEventAggregator _robotEventAggregator;
 
@@ -17,6 +18,14 @@ namespace RemoteControlledRobot.Robot
             _robotEventAggregator = robotEventAggregator;
         }
 
+        public void Start()
+        {
+            _robotEventAggregator.OnSpeedUpdated += UpdateSpeed;
+            _robotEventAggregator.OnBeep += Beep;
+
+            SignalStarted();
+        }
+
         private void UpdateSpeed(int speed)
         {
             _currentSpeed = speed;
@@ -25,16 +34,14 @@ namespace RemoteControlledRobot.Robot
 
         private void UpdateMovement()
         {
-            var speedLeft = (sbyte) _currentSpeed;
-            var speedRight = (sbyte) _currentSpeed;
-            RobotPiezoController.Beep(1000);
+            var speedLeft = (sbyte)_currentSpeed;
+            var speedRight = (sbyte)_currentSpeed;
             RobotMovementController.Move(speedLeft, speedRight);
         }
 
-        public void Start()
+        private void Beep()
         {
-            _robotEventAggregator.OnSpeedUpdated += UpdateSpeed;
-            SignalStarted();
+            RobotPiezoController.Beep(DefaultPiezzoBeepDuration);
         }
 
         private static void SignalStarted()

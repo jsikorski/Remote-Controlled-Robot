@@ -33,11 +33,27 @@ namespace RemoteControlledRobot.Controller
 
         public void SendSpeed(byte value)
         {
-            byte[] messageId = IntConverter.ToBytes(_lastVelocityMessageId);
-            var message = new[] {(byte) MessageType.Speed, messageId[0], messageId[1], messageId[2], messageId[3], value};
-            _nrf24L01Plus.SendTo(_destinationAddress, message);
+            SendMessage(value, ref _lastVelocityMessageId);
+        }
 
-            _lastVelocityMessageId++;
+        private void SendMessage(byte value, ref int lastMessageId)
+        {
+            byte[] messageId = IntConverter.ToBytes(lastMessageId);
+            var message = new[] {(byte) MessageType.Speed, messageId[0], messageId[1], messageId[2], messageId[3], value};
+            SendMessage(message);
+
+            lastMessageId++;
+        }
+
+        private void SendMessage(byte[] message)
+        {
+            _nrf24L01Plus.SendTo(_destinationAddress, message);
+        }
+
+        public void SendBeep()
+        {
+            var message = new[] {(byte) MessageType.Beep};
+            SendMessage(message);
         }
     }
 }

@@ -7,6 +7,7 @@ using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide.UI;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
+using Button = GHIElectronics.NETMF.Glide.UI.Button;
 
 namespace RemoteControlledRobot.Controller
 {
@@ -27,6 +28,9 @@ namespace RemoteControlledRobot.Controller
             var speedSlider = (Slider) controllerWindow.GetChildByName("SpeedSlider");
             speedSlider.ValueChangedEvent += UpdateRobotSpeed;
 
+            var beepButton = (Button) controllerWindow.GetChildByName("BeepButton");
+            beepButton.TapEvent += Beep;
+
             NrfController.Initialize("CONTR", "ROBOT");
 
             Thread.Sleep(Timeout.Infinite);
@@ -37,6 +41,11 @@ namespace RemoteControlledRobot.Controller
         {
             var slider = (Slider) sender;
             NrfController.SendSpeed((byte) slider.Value);
+        }
+
+        private static void Beep(object sender)
+        {
+            NrfController.SendBeep();
         }
     }
 }
