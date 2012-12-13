@@ -14,6 +14,7 @@ namespace RemoteControlledRobot.Controller
     public class Program
     {
         private static readonly NrfPeerToPeerController NrfController = new NrfPeerToPeerController();
+        private static Slider SpeedSlider { get; set; }
 
         public static void Main()
         {
@@ -25,11 +26,14 @@ namespace RemoteControlledRobot.Controller
 
             Glide.MainWindow = controllerWindow;
 
-            var speedSlider = (Slider) controllerWindow.GetChildByName("SpeedSlider");
-            speedSlider.ValueChangedEvent += UpdateRobotSpeed;
+            SpeedSlider = (Slider) controllerWindow.GetChildByName("SpeedSlider");
+            SpeedSlider.ValueChangedEvent += UpdateRobotSpeed;
 
             var beepButton = (Button) controllerWindow.GetChildByName("BeepButton");
             beepButton.TapEvent += Beep;
+
+            var stopButton = (Button) controllerWindow.GetChildByName("StopButton");
+            stopButton.TapEvent += StopRobot;
 
             NrfController.Initialize("CONTR", "ROBOT");
 
@@ -46,6 +50,12 @@ namespace RemoteControlledRobot.Controller
         private static void Beep(object sender)
         {
             NrfController.SendBeep();
+        }
+
+        private static void StopRobot(object sender)
+        {
+            SpeedSlider.Value = 100;
+            SpeedSlider.Invalidate();
         }
     }
 }
