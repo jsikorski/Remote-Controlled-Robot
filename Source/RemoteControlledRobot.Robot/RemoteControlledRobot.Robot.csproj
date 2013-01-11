@@ -46,6 +46,8 @@
     <Compile Include="MessagesController.cs" />
     <Compile Include="MessagesReceiver.cs" />
     <Compile Include="RobotEventAggregator.cs" />
+    <Compile Include="Utils\BasicAction.cs" />
+    <Compile Include="Utils\SeparateThreadTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FEZMini_GHIElectronics.NETMF.FEZ, Version=4.1.8.0, Culture=neutral, processorArchitecture=MSIL" />
