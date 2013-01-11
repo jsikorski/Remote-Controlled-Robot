@@ -8,12 +8,12 @@ namespace RemoteControlledRobot.Robot
 {
     public class MessagesController
     {
-        private readonly MessagesReceiver _messagesReceiver;
+        private readonly NrfController _nrfController;
         private readonly IEnumerable _messagesHandlers;
 
-        public MessagesController(RobotEventAggregator robotEventAggregator, MessagesReceiver messagesReceiver)
+        public MessagesController(RobotEventAggregator robotEventAggregator, NrfController nrfController)
         {
-            _messagesReceiver = messagesReceiver;
+            _nrfController = nrfController;
             _messagesHandlers = new ArrayList
                 {
                     new SpeedMessagesHandler(robotEventAggregator),
@@ -24,8 +24,7 @@ namespace RemoteControlledRobot.Robot
 
         public void Start()
         {
-            _messagesReceiver.OnDataReceived += ProcessMessage;
-            _messagesReceiver.Initialize();
+            _nrfController.OnDataReceived += ProcessMessage;
         }
 
         private void ProcessMessage(byte[] data)

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using GHIElectronics.NETMF.Glide;
 using GHIElectronics.NETMF.Glide.Display;
@@ -35,6 +36,7 @@ namespace RemoteControlledRobot.Controller
             var stopButton = (Button) controllerWindow.GetChildByName("StopButton");
             stopButton.TapEvent += StopRobot;
 
+            NrfController.OnDataReceived += HandleObstacleDetection;
             NrfController.Initialize("CONTR", "ROBOT");
 
             Thread.Sleep(Timeout.Infinite);
@@ -63,6 +65,12 @@ namespace RemoteControlledRobot.Controller
         {
             SpeedSlider.Value = 100;
             SpeedSlider.Invalidate();
+        }
+
+        private static void HandleObstacleDetection(byte[] data)
+        {
+            StopRobot(new object());
+            Glide.MessageBoxManager.Show("Robot has detected an obstacle. Please back out your robot.");
         }
     }
 }

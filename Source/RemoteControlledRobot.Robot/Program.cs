@@ -8,13 +8,15 @@ namespace RemoteControlledRobot.Robot
         {
             var robotEventAggregator = new RobotEventAggregator();
 
-            var messagesReceiver = new MessagesReceiver();
-            var messagesController = new MessagesController(robotEventAggregator, messagesReceiver);
-            var robot = new Robot(robotEventAggregator);
+            var nrfController = new NrfController();
+            var messagesController = new MessagesController(robotEventAggregator, nrfController);
+            var robot = new Robot(robotEventAggregator, nrfController);
 
             robot.Start();
-            messagesController.Start();            
-            
+            messagesController.Start();
+
+            nrfController.Initialize("ROBOT", "CONTR");
+
             Thread.Sleep(Timeout.Infinite);
         }
     }

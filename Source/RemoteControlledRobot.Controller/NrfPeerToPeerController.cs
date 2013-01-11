@@ -15,6 +15,8 @@ namespace RemoteControlledRobot.Controller
         private int _lastVelocityMessageId;
         private int _lastDirectionMessageId;
 
+        public event NRF24L01Plus.OnDataRecievedHandler OnDataReceived;
+
         public NrfPeerToPeerController()
         {
             _nrf24L01Plus = new NRF24L01Plus();
@@ -29,6 +31,7 @@ namespace RemoteControlledRobot.Controller
 
             _destinationAddress = Encoding.UTF8.GetBytes(destinationAddress);
 
+            _nrf24L01Plus.OnDataReceived += data => OnDataReceived.Invoke(data);
             _nrf24L01Plus.Enable();
         }
 

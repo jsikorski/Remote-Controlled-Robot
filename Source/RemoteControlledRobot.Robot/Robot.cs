@@ -12,6 +12,7 @@ namespace RemoteControlledRobot.Robot
         private const int DefaultPiezzoBeepDuration = 1000;
         private static readonly OutputPort Led = new OutputPort((Cpu.Pin)FEZ_Pin.Digital.Di4, true);
         private readonly RobotEventAggregator _robotEventAggregator;
+        private readonly NrfController _nrfController;
 
         private const int SensorsTriggerPercentage = 35;
         private static readonly FEZ_Components.ReflectiveSensor LeftSensor =
@@ -26,10 +27,11 @@ namespace RemoteControlledRobot.Robot
         private float _currentLeft = 1.0f;
         private float _currentRight = 1.0f;
 
-        public Robot(RobotEventAggregator robotEventAggregator)
+        public Robot(RobotEventAggregator robotEventAggregator, NrfController nrfController)
         {
             _reflectiveSensorsTimer = new SeparateThreadTimer(CheckSensors, SensorsTimerInterval);
             _robotEventAggregator = robotEventAggregator;
+            _nrfController = nrfController;
         }
 
         public void Start()
@@ -89,6 +91,7 @@ namespace RemoteControlledRobot.Robot
             {
                 _currentSpeed = 0;
                 UpdateMovement();
+                _nrfController.SendObstacleDetected();
                 RobotPiezoController.Beep(1000);
             }
         }

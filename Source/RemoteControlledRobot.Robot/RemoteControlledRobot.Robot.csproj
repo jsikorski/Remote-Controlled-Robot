@@ -44,7 +44,7 @@
     </Compile>
     <Compile Include="Robot.cs" />
     <Compile Include="MessagesController.cs" />
-    <Compile Include="MessagesReceiver.cs" />
+    <Compile Include="NrfController.cs" />
     <Compile Include="RobotEventAggregator.cs" />
     <Compile Include="Utils\BasicAction.cs" />
     <Compile Include="Utils\SeparateThreadTimer.cs" />
