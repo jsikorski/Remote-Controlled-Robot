@@ -1,12 +1,8 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Runtime.CompilerServices;
 using System.Threading;
 using GHIElectronics.NETMF.Glide;
 using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide.UI;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Hardware;
 using Button = GHIElectronics.NETMF.Glide.UI.Button;
 
 namespace RemoteControlledRobot.Controller
@@ -14,6 +10,7 @@ namespace RemoteControlledRobot.Controller
     public class Program
     {
         private static readonly NrfPeerToPeerController NrfController = new NrfPeerToPeerController();
+        private static Slider DirectionSlider { get; set; }
         private static Slider SpeedSlider { get; set; }
 
         public static void Main()
@@ -25,6 +22,9 @@ namespace RemoteControlledRobot.Controller
             Glide.FitToScreen = true;
 
             Glide.MainWindow = controllerWindow;
+
+            DirectionSlider = (Slider) controllerWindow.GetChildByName("DirectionSlider");
+            DirectionSlider.ValueChangedEvent += UpdateRobotDirection;
 
             SpeedSlider = (Slider) controllerWindow.GetChildByName("SpeedSlider");
             SpeedSlider.ValueChangedEvent += UpdateRobotSpeed;
@@ -38,6 +38,13 @@ namespace RemoteControlledRobot.Controller
             NrfController.Initialize("CONTR", "ROBOT");
 
             Thread.Sleep(Timeout.Infinite);
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private static void UpdateRobotDirection(object sender)
+        {
+            var slider = (Slider)sender;
+            NrfController.SendDirection((byte) slider.Value);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

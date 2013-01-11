@@ -12,6 +12,8 @@ namespace RemoteControlledRobot.Robot
         private readonly RobotEventAggregator _robotEventAggregator;
 
         private int _currentSpeed;
+        private float _currentLeft = 1.0f;
+        private float _currentRight = 1.0f;
 
         public Robot(RobotEventAggregator robotEventAggregator)
         {
@@ -21,6 +23,7 @@ namespace RemoteControlledRobot.Robot
         public void Start()
         {
             _robotEventAggregator.OnSpeedUpdated += UpdateSpeed;
+            _robotEventAggregator.OnDirectionUpdated += UpdateDirection;
             _robotEventAggregator.OnBeep += Beep;
 
             SignalStarted();
@@ -28,14 +31,32 @@ namespace RemoteControlledRobot.Robot
 
         private void UpdateSpeed(int speed)
         {
+            // speed [0, 100]
             _currentSpeed = speed;
+            UpdateMovement();
+        }
+
+        private void UpdateDirection(float left, float right)
+        {
+            // left, right [-1, 1]
+            _currentLeft = left;
+            _currentRight = right;
             UpdateMovement();
         }
 
         private void UpdateMovement()
         {
-            var speedLeft = (sbyte)_currentSpeed;
-            var speedRight = (sbyte)_currentSpeed;
+            // Robot recieves values from -100 to 100
+            var speedLeft = (sbyte)(_currentSpeed * _currentLeft);
+            var speedRight = (sbyte)(_currentSpeed * _currentRight);
+
+            if (speedLeft > 100 || speedLeft < -100 || speedRight > 100 || speedRight < -100)
+            {
+                RobotPiezoController.Beep(10000);
+                speedLeft = 0;
+                speedRight = 0;
+            }
+
             RobotMovementController.Move(speedLeft, speedRight);
         }
 

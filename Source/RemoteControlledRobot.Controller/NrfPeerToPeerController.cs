@@ -13,6 +13,7 @@ namespace RemoteControlledRobot.Controller
         private byte[] _destinationAddress;
 
         private int _lastVelocityMessageId;
+        private int _lastDirectionMessageId;
 
         public NrfPeerToPeerController()
         {
@@ -33,13 +34,14 @@ namespace RemoteControlledRobot.Controller
 
         public void SendSpeed(byte value)
         {
-            SendMessage(value, ref _lastVelocityMessageId);
+            SendMessage(MessageType.Speed, value, ref _lastVelocityMessageId);
         }
 
-        private void SendMessage(byte value, ref int lastMessageId)
+        private void SendMessage(MessageType messageType, byte value, ref int lastMessageId)
         {
             byte[] messageId = IntConverter.ToBytes(lastMessageId);
-            var message = new[] {(byte) MessageType.Speed, messageId[0], messageId[1], messageId[2], messageId[3], value};
+            // Type, MessageId{4}, Value
+            var message = new[] { (byte)messageType, messageId[0], messageId[1], messageId[2], messageId[3], value };
             SendMessage(message);
 
             lastMessageId++;
@@ -54,6 +56,11 @@ namespace RemoteControlledRobot.Controller
         {
             var message = new[] {(byte) MessageType.Beep};
             SendMessage(message);
+        }
+
+        public void SendDirection(byte value)
+        {
+            SendMessage(MessageType.Direction, value, ref _lastDirectionMessageId);
         }
     }
 }

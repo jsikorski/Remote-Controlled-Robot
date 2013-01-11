@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="Components\FEZ_Components_ReflectiveSensor.cs" />
     <Compile Include="MessagesHandlers\BeepMessagesHandler.cs" />
+    <Compile Include="MessagesHandlers\DirectionMessagesHandler.cs" />
     <Compile Include="MessagesHandlers\IMessagesHandler.cs" />
     <Compile Include="MessagesHandlers\SpeedMessagesHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,7 +16,8 @@ namespace RemoteControlledRobot.Robot
             _messagesReceiver = messagesReceiver;
             _messagesHandlers = new ArrayList
                 {
-                    new SpeedMessagesHandler(robotEventAggregator), 
+                    new SpeedMessagesHandler(robotEventAggregator),
+                    new DirectionMessagesHandler(robotEventAggregator),
                     new BeepMessagesHandler(robotEventAggregator)
                 };
         }
@@ -33,6 +34,7 @@ namespace RemoteControlledRobot.Robot
             var messageHandler = GetMessageHandler(messageType);
             var messageData = ExtractMessageData(data);
 
+            // Handle raw data - without message type byte
             ((IMessagesHandler) messageHandler).Handle(messageData);
         }
 

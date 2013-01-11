@@ -1,6 +1,4 @@
-﻿using Gralin.NETMF.Nordic;
-
-namespace RemoteControlledRobot.Robot
+﻿namespace RemoteControlledRobot.Robot
 {
     public delegate void RobotSpeedUpdatedHandler(int speed);
     public delegate void RobotDirectionUpdatedHandler(float left, float right);
